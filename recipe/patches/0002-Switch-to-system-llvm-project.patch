@@ -1,0 +1,61 @@
+From 165bd054b1482b5cb43fb59bc76fc318c491d942 Mon Sep 17 00:00:00 2001
+From: "Uwe L. Korn" <uwe.korn@quantco.com>
+Date: Tue, 1 Mar 2022 16:14:22 +0100
+Subject: [PATCH] Switch to system llvm-project
+
+---
+ tensorflow/workspace2.bzl | 15 +++++++++++++--
+ tensorflow/workspace3.bzl |  4 ----
+ 2 files changed, 13 insertions(+), 6 deletions(-)
+
+diff --git a/tensorflow/workspace2.bzl b/tensorflow/workspace2.bzl
+index 60deadb1..7fdf536f 100644
+--- a/tensorflow/workspace2.bzl
++++ b/tensorflow/workspace2.bzl
+@@ -14,7 +14,6 @@ load("@tf_toolchains//toolchains/embedded/arm-linux:arm_linux_toolchain_configur
+ load("//third_party:repo.bzl", "tf_http_archive", "tf_mirror_urls")
+ load("//third_party/clang_toolchain:cc_configure_clang.bzl", "cc_download_clang_toolchain")
+ load("//tensorflow/tools/def_file_filter:def_file_filter_configure.bzl", "def_file_filter_configure")
+-load("//third_party/llvm:setup.bzl", "llvm_setup")
+ 
+ # Import third party repository rules. See go/tfbr-thirdparty.
+ load("//third_party/FP16:workspace.bzl", FP16 = "repo")
+@@ -523,7 +522,19 @@ def _tf_repositories():
+         urls = tf_mirror_urls("https://github.com/antirez/linenoise/archive/c894b9e59f02203dbe4e2be657572cf88c4230c3.tar.gz"),
+     )
+ 
+-    llvm_setup(name = "llvm-project")
++    native.new_local_repository(
++	name = "llvm-project",
++	path = "llvm-project",
++	build_file_content = "# empty",
++    )
++    #tf_http_archive(
++    #    name = "llvm-project",
++    #    build_file = "//third_party/llvm:BUILD",
++    #    sha256 = "22054926b426c66d8f2bc22071365df6e35f3aacf19ad943bc6167d4cae3bebb",
++    #    strip_prefix = "no_valid_prefix",
++    #    system_build_file = "//third_party/systemlibs:llvm.BUILD",
++    #    urls = tf_mirror_urls("https://github.com/invalid/mirror/source.tar.gz"),
++    #)
+ 
+     # Intel openMP that is part of LLVM sources.
+     tf_http_archive(
+diff --git a/tensorflow/workspace3.bzl b/tensorflow/workspace3.bzl
+index 09b2d030..9a80d3d5 100644
+--- a/tensorflow/workspace3.bzl
++++ b/tensorflow/workspace3.bzl
+@@ -47,10 +47,6 @@ def workspace():
+         ],
+     )
+ 
+-    # Load the raw llvm-project.  llvm does not have build rules set up by default,
+-    # but provides a script for setting up build rules via overlays.
+-    llvm("llvm-raw")
+-
+ # Alias so it can be loaded without assigning to a different symbol to prevent
+ # shadowing previous loads and trigger a buildifier warning.
+ tf_workspace3 = workspace
+-- 
+2.32.0 (Apple Git-132)
+

@@ -2,6 +2,8 @@
 
 set -ex
 
+python $RECIPE_DIR/generate_llvm.py
+
 export PATH="$PWD:$PATH"
 export CC=$(basename $CC)
 export CXX=$(basename $CXX)
