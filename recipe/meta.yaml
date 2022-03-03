@@ -29,8 +29,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
-    - bazel <5
-    - bazel >=4.2.1  # [osx and arm64]
+    - bazel 4.2.1
     - grpc-cpp
     - libprotobuf
     - nasm

@@ -1,14 +1,76 @@
+from glob import glob as py_glob
 from pathlib import Path
 from shutil import copyfile
-from glob import glob as py_glob
-import requests
+from subprocess import check_output
 import os
 import re
+import requests
+
 
 # TODO: Automatically extract this
 llvm_commit = "55c71c9eac9bc7f956a05fa9258fad4f86565450"
 Path("llvm-project/llvm").mkdir(exist_ok=True, parents=True)
 Path("llvm-project/mlir").mkdir(exist_ok=True, parents=True)
+
+# Compute dependencies between LLVM/MLIR static libraries
+#
+# LIEF doesn't yet support static libraries: https://github.com/lief-project/LIEF/issues/233
+# Thus this is a small parser around the output of `nm`.
+
+libs = list((Path(os.environ["PREFIX"]) / "lib").glob("libMLIR*.a")) + list(
+    (Path(os.environ["PREFIX"]) / "lib").glob("libLLVM*.a")
+)
+lookup = {}
+deps = {}
+
+# Parse the output of nm
+for lib in libs:
+    deps[lib.name] = set()
+    lookup[lib.name] = {
+        "defined": set(),
+        "undefined": set()
+    }
+    out = check_output([os.environ["NM"], lib]).decode()
+    lines = out.split("\n")[1:]
+    for line in lines:
+        if line.startswith(str(lib)):
+            continue
+        split = line.split()
+        if len(split) == 0:
+            continue
+        state = split[-2].lower()
+        symbol = split[-1]
+        if state in ('b', 't', 'd'):
+            lookup[lib.name]["defined"].add(symbol)
+        elif state == "u":
+            lookup[lib.name]["undefined"].add(symbol)
+
+# Resolve undefined symbols
+for lib in libs:
+    for possible_lib in libs:
+        if len(lookup[lib.name]["undefined"]) == 0:
+            break
+        undefined_len = len(lookup[lib.name]["undefined"])
+        lookup[lib.name]["undefined"] -=  lookup[possible_lib.name]["defined"]
+        if len(lookup[lib.name]["undefined"]) < undefined_len:
+            deps[lib.name].add(possible_lib.name)
+
+# Resolve transitive dependencies; by using this approach we also can handle
+# cyclic dependencies between libraries.
+deps_changed = True
+while deps_changed:
+    deps_changed = False
+    for lib in libs:
+        dep_len = len(deps[lib.name])
+        for dep in list(deps[lib.name]):
+            deps[lib.name] |= deps[dep]
+        if len(deps[lib.name]) != dep_len:
+            deps_changed = True
+
+# The casing in the bazel files is different than the actual libs, so look it up here.
+case_lookup = {}
+for lib in deps.keys():
+    case_lookup[lib[3:-2].lower()] = lib[3:-2]
 
 # Shared code between LLVM and MLIR bazel generation
 
@@ -61,18 +123,42 @@ exports_files(
 PREFIX = Path(os.environ["PREFIX"])
 SYMBOL = "LLVM"
 
+def add_link_dependencies(libraries):
+    """Add static library dependencies to the link_opts."""
+    link_opts = []
+    for lib in libraries:
+        link_opts.append(f"-l{lib}")
+        dependencies = deps[f"lib{lib}.a"]
+        for dep in dependencies:
+            name = dep[3:-2]
+            link = f"-l{name}"
+            if link not in link_opts:
+                link_opts.append(link)
+
+    return link_opts
+
 def make_linkopts(name):
-    # TODO: More strategies
-    #   1. If the lib doesn't exist, try to find a more global, e.g. QuantOps -> Quant
-    #   2. Otherwise, add all MLIR libs and trust --as-needed linkage
-    if name == "Support":
-        return [f"-lLLVM{l}" for l in LLVM_LIBS]
-    libname = f"lib{SYMBOL}{name}.a"
+    fullname = SYMBOL + name
+    # Fix the caseing of the library to match the actual file names.
+    if fullname.lower() in case_lookup:
+        fullname = case_lookup[fullname.lower()]
+
+    # There are some difference in the names used in Bazel and the actual static libraries.
+    # This lookup here is by done by simply guessing them given
+    # the linkage errors that popped up.
+    if fullname == "MLIRAnalysis":
+        return add_link_dependencies(["MLIRPresburger", "MLIRAnalysis", "MLIRLoopAnalysis"])
+    if fullname == "MLIRCallOpInterfaces":
+        return add_link_dependencies(["MLIRCallInterfaces"])
+    if fullname == "MLIRShapeTransforms":
+        return add_link_dependencies(["MLIRShape", "MLIRShapeOpsTransforms"])
+
+    libname = f"lib{fullname}.a"
     upper_match = re.search("(.*)([A-Z][a-z]*)$", name)
     if (PREFIX / "lib" / libname).exists():
-        return [f"-l{SYMBOL}{name}"]
+        return add_link_dependencies([f"{fullname}"])
     elif (PREFIX / "lib" / libname.replace("Dialect", "IR")).exists():
-        return [f"-l{SYMBOL}{name.replace('Dialect', 'IR')}"]
+        return [f"-l{fullname.replace('Dialect', 'IR')}"]
     elif upper_match is not None:
         name = upper_match.group(1)
         if len(name) > 1:
@@ -85,6 +171,9 @@ libdir = Path(os.environ["PREFIX"]) / "lib"
 output = """
 exports_files([\"LICENSE.TXT\"])
 """
+
+r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/llvm/LICENSE.txt")
+Path("llvm-project/llvm/LICENSE.txt").write_text(r.text)
 
 r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/utils/bazel/llvm-project-overlay/llvm/BUILD.bazel")
 
@@ -116,6 +205,8 @@ Path("llvm-project/llvm/BUILD").write_text(output)
 
 r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/utils/bazel/llvm-project-overlay/mlir/tblgen.bzl")
 Path("llvm-project/mlir/tblgen.bzl").write_text(r.text)
+r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/mlir/LICENSE.txt")
+Path("llvm-project/mlir/LICENSE.txt").write_text(r.text)
 
 output = """
 load(":tblgen.bzl", "td_library")
@@ -152,28 +243,6 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = {filtered_deps},
 )"""
-
-def make_linkopts(name):
-    # TODO: More strategies
-    #   1. If the lib doesn't exist, try to find a more global, e.g. QuantOps -> Quant
-    #   2. Otherwise, add all MLIR libs and trust --as-needed linkage
-    if name == "Support":
-        return [f"-lMLIR{l}" for l in MLIR_LIBS]
-    if name == "Analysis":
-        return ["-lMLIRPresburger", "-lMLIRAnalysis", "-lMLIRLoopAnalysis"]
-    if name == "CallOpInterfaces":
-        return ["-lMLIRCallInterfaces"]
-    libname = f"libMLIR{name}.a"
-    upper_match = re.search("(.*)([A-Z][a-z]*)$", name)
-    if (PREFIX / "lib" / libname).exists():
-        return [f"-lMLIR{name}"] + [f"-lMLIR{l}" for l in MLIR_LIBS if l.startswith(name)]
-    elif (PREFIX / "lib" / libname.replace("Dialect", "IR")).exists():
-        return [f"-lMLIR{name.replace('Dialect', 'IR')}"]
-    elif upper_match is not None:
-        name = upper_match.group(1)
-        if len(name) > 1:
-            return make_linkopts(name)
-    return []
 
 def cc_headers_only(name, *args, **kwargs):
     global output
