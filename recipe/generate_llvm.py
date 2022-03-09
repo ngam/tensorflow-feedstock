@@ -33,7 +33,7 @@ for lib in libs:
     out = check_output([os.environ["NM"], lib]).decode()
     lines = out.split("\n")[1:]
     for line in lines:
-        if line.startswith(str(lib)):
+        if line.startswith(str(lib)) or line.endswith(":"):
             continue
         split = line.split()
         if len(split) == 0:
