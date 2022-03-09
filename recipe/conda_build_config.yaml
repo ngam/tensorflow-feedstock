@@ -21,3 +21,5 @@ cuda_compiler_version:
   - 11.0                       # [(linux64 or win) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
   - 11.1                       # [(linux64 or win) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
   - 11.2                       # [(linux64 or win) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+channel_sources:
+  - conda-forge/label/mlir_tf,conda-forge/label/llvm_tf,conda-forge
