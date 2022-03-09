@@ -2,6 +2,9 @@
 
 set -ex
 
+# The patch doesn't set the executable flag correctly.
+chmod +x tensorflow/tools/pip_package/concat_licenses.sh
+
 python $RECIPE_DIR/generate_llvm.py
 
 export PATH="$PWD:$PATH"
@@ -186,5 +189,7 @@ pushd $SRC_DIR/libtensorflow_cc_output
   tar cf ../libtensorflow_cc_output.tar .
 popd
 rm -r $SRC_DIR/libtensorflow_cc_output
+
+cp bazel-bin/tensorflow/tools/pip_package/THIRD_PARTY_TF_PY_LICENSES .
 
 bazel clean
