@@ -101,8 +101,11 @@ def import_file(f):
 
 def glob(search, **kwargs):
     out = []
+    cwd = os.getcwd()
+    os.chdir(os.environ["PREFIX"])
     for a in search:
-        out += py_glob(a, root_dir=os.environ["PREFIX"])
+        out += py_glob(a)
+    os.chdir(cwd)
     return out
 
 def exports_files(files):
