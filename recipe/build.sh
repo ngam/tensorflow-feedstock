@@ -52,6 +52,7 @@ export TF_SYSTEM_LIBS="
   gif
   icu
   libjpeg_turbo
+  nsync
   org_sqlite
   png
   pybind11
@@ -85,7 +86,6 @@ if [[ "${target_platform}" == "osx-64" ]]; then
   TARGET_CPU=darwin
 fi
 
-# If you really want to see what is executed, add --subcommands
 BUILD_OPTS="
     --crosstool_top=//custom_toolchain:toolchain
     --logging=6
@@ -95,6 +95,8 @@ BUILD_OPTS="
     --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
     --config=noaws
     --cpu=${TARGET_CPU}"
+# If you really want to see what is executed, add --subcommands
+# BUILD_OPTS="${BUILD_OPTS} --subcommands"
 
 if [[ "${target_platform}" == "osx-arm64" ]]; then
   BUILD_OPTS="${BUILD_OPTS} --config=macos_arm64"
