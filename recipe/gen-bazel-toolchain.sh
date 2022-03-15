@@ -3,6 +3,12 @@
 set -euxo pipefail
 
 function apply_cc_template() {
+  # Strip trailing/duplicate whitespace
+  CFLAGS=$(echo $CFLAGS | xargs echo -n)
+  CPPFLAGS=$(echo $CPPFLAGS | xargs echo -n)
+  CXXFLAGS=$(echo $CXXFLAGS | xargs echo -n)
+  LDFLAGS=$(echo $LDFLAGS | xargs echo -n)
+
   sed -ie "s:TARGET_CPU:${TARGET_CPU}:" $1
   sed -ie "s:TARGET_LIBC:${TARGET_LIBC}:" $1
   sed -ie "s:TARGET_SYSTEM:${TARGET_SYSTEM}:" $1
