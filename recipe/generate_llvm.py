@@ -176,7 +176,7 @@ exports_files([\"LICENSE.TXT\"])
 """
 
 r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/llvm/LICENSE.txt")
-Path("llvm-project/llvm/LICENSE.txt").write_text(r.text)
+Path("llvm-project/llvm/LICENSE.TXT").write_text(r.text)
 
 r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/utils/bazel/llvm-project-overlay/llvm/BUILD.bazel")
 
@@ -209,7 +209,7 @@ Path("llvm-project/llvm/BUILD").write_text(output)
 r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/utils/bazel/llvm-project-overlay/mlir/tblgen.bzl")
 Path("llvm-project/mlir/tblgen.bzl").write_text(r.text)
 r = requests.get(f"https://raw.githubusercontent.com/llvm/llvm-project/{llvm_commit}/mlir/LICENSE.txt")
-Path("llvm-project/mlir/LICENSE.txt").write_text(r.text)
+Path("llvm-project/mlir/LICENSE.TXT").write_text(r.text)
 
 output = """
 load(":tblgen.bzl", "td_library")

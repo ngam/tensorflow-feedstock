@@ -97,6 +97,8 @@ BUILD_OPTS="
     --cpu=${TARGET_CPU}"
 # If you really want to see what is executed, add --subcommands
 # BUILD_OPTS="${BUILD_OPTS} --subcommands"
+# If your local RAM is not sufficient
+# BUILD_OPTS="${BUILD_OPTS} --local_cpu_resources=1"
 
 if [[ "${target_platform}" == "osx-arm64" ]]; then
   BUILD_OPTS="${BUILD_OPTS} --config=macos_arm64"
