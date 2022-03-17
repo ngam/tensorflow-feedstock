@@ -190,7 +190,17 @@ for lib in llvm_libs:
 
 sh_binary = py_binary = binary_alias = filegroup = gentbl = cc_binary = template_rule = genrule = enum_targets_gen = package = load = empty
 llvm_config_defines = []
-llvm_targets = []
+# See https://github.com/tensorflow/tensorflow/blob/3f878cff5b698b82eea85db2b60d65a2e320850e/third_party/llvm/setup.bzl#L6
+llvm_targets = [
+    "AArch64",
+    "AMDGPU",
+    "ARM",
+    "NVPTX",
+    "PowerPC",
+    "RISCV",
+    "SystemZ",
+    "X86",
+]
 
 def select(*args, **kwargs):
     return []
