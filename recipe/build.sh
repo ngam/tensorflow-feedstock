@@ -2,6 +2,14 @@
 
 set -ex
 
+if [[ "${target_platform}" != "${build_platform}" ]]; then
+  conda create -y -p llvm-build llvmdev=14.0.0.tf280_55c71c9eac9b mlir=14.0.0.tf280_55c71c9eac9b -c conda-forge/label/llvm_tf -c conda-forge/label/mlir_tf
+  cp -r llvm-build/include/llvm $BUILD_PREFIX/include/
+  cp -r llvm-build/include/mlir $BUILD_PREFIX/include/
+  cp -r llvm-build/lib/libMLIR* $BUILD_PREFIX/lib
+  cp -r llvm-build/lib/libLLVM* $BUILD_PREFIX/lib
+fi
+
 # The patch doesn't set the executable flag correctly.
 chmod +x tensorflow/tools/pip_package/concat_licenses.sh
 

@@ -25,6 +25,13 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - nsync                                  # [build_platform != target_platform]
+    - snappy                                 # [build_platform != target_platform]
+    - giflib                                 # [build_platform != target_platform]
+    - jpeg                                   # [build_platform != target_platform]
+    - icu                                    # [build_platform != target_platform]
+    - libpng                                 # [build_platform != target_platform]
+    - flatbuffers <2.0.6                     # [build_platform != target_platform]
     - numpy 1.20.*  # [py<310 and (build_platform != target_platform)]
     - numpy 1.21.*  # [py>=310 and (build_platform != target_platform)]
     - {{ compiler('c') }}
