@@ -4,6 +4,10 @@ set -ex
 
 if [[ "${target_platform}" != "${build_platform}" ]]; then
   conda create -y -p llvm-build llvmdev=14.0.0.tf280_55c71c9eac9b mlir=14.0.0.tf280_55c71c9eac9b -c conda-forge/label/llvm_tf -c conda-forge/label/mlir_tf
+  cp -r llvm-build/bin/mlir-opt $BUILD_PREFIX/bin/
+  cp -r llvm-build/bin/mlir-reduce $BUILD_PREFIX/bin/
+  cp -r llvm-build/bin/mlir-tblgen $BUILD_PREFIX/bin/
+  cp -r llvm-build/bin/mlir-linalg-ods-yaml-gen $BUILD_PREFIX/bin/
   cp -r llvm-build/include/llvm $BUILD_PREFIX/include/
   cp -r llvm-build/include/mlir $BUILD_PREFIX/include/
   cp -r llvm-build/lib/libMLIR* $BUILD_PREFIX/lib
