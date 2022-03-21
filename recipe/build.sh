@@ -64,6 +64,7 @@ export TF_SYSTEM_LIBS="
   gif
   icu
   libjpeg_turbo
+  mkl_dnn_v1
   nsync
   org_sqlite
   png
