@@ -82,7 +82,8 @@ requirements:
     - jpeg
     - libpng
     - libprotobuf
-    - onednn  # [not (osx and arm)]
+    - onednn                 # [not (osx and arm)]
+    - onednn-cpu-threadpool  # [not (osx and arm)]
     - openssl
     - pybind11
     - sqlite
