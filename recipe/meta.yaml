@@ -82,8 +82,8 @@ requirements:
     - jpeg
     - libpng
     - libprotobuf
-    - onednn                 # [not (osx and arm)]
-    - onednn-cpu-threadpool  # [not (osx and arm)]
+    - onednn                 # [not (osx and arm64)]
+    - onednn-cpu-threadpool  # [not (osx and arm64)]
     - openssl
     - pybind11
     - sqlite
@@ -163,8 +163,8 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
-        - onednn                 # [not (osx and arm)]
-        - onednn-cpu-threadpool  # [not (osx and arm)]
+        - onednn                 # [not (osx and arm64)]
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         - openssl
         - pybind11
         - snappy
@@ -315,8 +315,8 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
-        - onednn                 # [not (osx and arm)]
-        - onednn-cpu-threadpool  # [not (osx and arm)]
+        - onednn                 # [not (osx and arm64)]
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         - openssl
         - snappy
         - sqlite
@@ -362,8 +362,8 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
-        - onednn                 # [not (osx and arm)]
-        - onednn-cpu-threadpool  # [not (osx and arm)]
+        - onednn                 # [not (osx and arm64)]
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         - openssl
         - snappy
         - sqlite
