@@ -82,8 +82,8 @@ requirements:
     - jpeg
     - libpng
     - libprotobuf
-    - onednn                 # [not (osx and arm64)]
-    - onednn-cpu-threadpool  # [not (osx and arm64)]
+    - onednn
+    - onednn-cpu-threadpool
     - openssl
     - pybind11
     - sqlite
@@ -163,8 +163,8 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
-        - onednn                 # [not (osx and arm64)]
-        - onednn-cpu-threadpool  # [not (osx and arm64)]
+        - onednn
+        - onednn-cpu-threadpool
         - openssl
         - pybind11
         - snappy
@@ -199,6 +199,7 @@ outputs:
         - h5py >=2.9.0
         - keras-preprocessing >=1.1.1
         - {{ pin_compatible('numpy') }}
+        - onednn-cpu-threadpool
         - opt_einsum >=2.3.2
         - protobuf >=3.9.2
         - python-flatbuffers >=1.12
@@ -315,13 +316,14 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
-        - onednn                 # [not (osx and arm64)]
-        - onednn-cpu-threadpool  # [not (osx and arm64)]
+        - onednn
+        - onednn-cpu-threadpool
         - openssl
         - snappy
         - sqlite
         - zlib
       run:
+        - onednn-cpu-threadpool
         # avoid that people without GPUs needlessly download ~200-300MB
         - __cuda  # [cuda_compiler_version != "None"]
     test:
@@ -362,13 +364,14 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
-        - onednn                 # [not (osx and arm64)]
-        - onednn-cpu-threadpool  # [not (osx and arm64)]
+        - onednn
+        - onednn-cpu-threadpool
         - openssl
         - snappy
         - sqlite
         - zlib
       run:
+        - onednn-cpu-threadpool
         # avoid that people without GPUs needlessly download ~200-300MB
         - __cuda  # [cuda_compiler_version != "None"]
     test:
