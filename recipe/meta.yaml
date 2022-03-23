@@ -163,6 +163,8 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
+        - onednn                 # [not (osx and arm)]
+        - onednn-cpu-threadpool  # [not (osx and arm)]
         - openssl
         - pybind11
         - snappy
@@ -313,6 +315,8 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
+        - onednn                 # [not (osx and arm)]
+        - onednn-cpu-threadpool  # [not (osx and arm)]
         - openssl
         - snappy
         - sqlite
@@ -358,6 +362,8 @@ outputs:
         - libcurl
         - libpng
         - libprotobuf
+        - onednn                 # [not (osx and arm)]
+        - onednn-cpu-threadpool  # [not (osx and arm)]
         - openssl
         - snappy
         - sqlite
