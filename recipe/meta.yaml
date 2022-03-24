@@ -33,6 +33,8 @@ requirements:
     - icu                                    # [build_platform != target_platform]
     - libpng                                 # [build_platform != target_platform]
     - flatbuffers <2.0.6                     # [build_platform != target_platform]
+    - onednn                                 # [build_platform != target_platform]
+    - onednn-cpu-threadpool                  # [build_platform != target_platform]
     - numpy 1.20.*  # [py<310 and (build_platform != target_platform)]
     - numpy 1.21.*  # [py>=310 and (build_platform != target_platform)]
     - {{ compiler('c') }}
@@ -83,7 +85,7 @@ requirements:
     - libpng
     - libprotobuf
     - onednn
-    - onednn-cpu-threadpool
+    - onednn-cpu-threadpool  # [not (osx and arm64)]
     - openssl
     - pybind11
     - sqlite
@@ -164,7 +166,7 @@ outputs:
         - libpng
         - libprotobuf
         - onednn
-        - onednn-cpu-threadpool
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         - openssl
         - pybind11
         - snappy
@@ -199,7 +201,7 @@ outputs:
         - h5py >=2.9.0
         - keras-preprocessing >=1.1.1
         - {{ pin_compatible('numpy') }}
-        - onednn-cpu-threadpool
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         - opt_einsum >=2.3.2
         - protobuf >=3.9.2
         - python-flatbuffers >=1.12
@@ -317,13 +319,13 @@ outputs:
         - libpng
         - libprotobuf
         - onednn
-        - onednn-cpu-threadpool
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         - openssl
         - snappy
         - sqlite
         - zlib
       run:
-        - onednn-cpu-threadpool
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         # avoid that people without GPUs needlessly download ~200-300MB
         - __cuda  # [cuda_compiler_version != "None"]
     test:
@@ -365,13 +367,13 @@ outputs:
         - libpng
         - libprotobuf
         - onednn
-        - onednn-cpu-threadpool
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         - openssl
         - snappy
         - sqlite
         - zlib
       run:
-        - onednn-cpu-threadpool
+        - onednn-cpu-threadpool  # [not (osx and arm64)]
         # avoid that people without GPUs needlessly download ~200-300MB
         - __cuda  # [cuda_compiler_version != "None"]
     test:
