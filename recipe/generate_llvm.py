@@ -141,10 +141,26 @@ def add_link_dependencies(libraries):
 
     return link_opts
 
+# global cache of known linkages of dependencies
+linkopts_cache = {"LLVM": {}, "MLIR": {}}
+
 def make_linkopts(name, deps):
     linkopts = do_make_linkopts(name)
+
+    # Add full list to global cache. This avoids the need for recursive pruning when using this cache.
+    linkopts_cache[SYMBOL][name] = set(linkopts)
+
+    # Remove static libraries of direct dependencies
     converted_deps = {f"-l{SYMBOL}{dep[1:]}" for dep in deps}
-    return [opt for opt in linkopts if opt not in converted_deps]
+    linkopts = [opt for opt in linkopts if opt not in converted_deps]
+
+    # Remove static libraries of indirect dependencies via linkopts_cache
+    provided_deps = set()
+    for dep in deps:
+        provided_deps |= linkopts_cache[SYMBOL].get(dep[1:], set())
+    linkopts = [opt for opt in linkopts if opt not in provided_deps]
+
+    return linkopts
 
 def do_make_linkopts(name):
     fullname = SYMBOL + name
