@@ -84,10 +84,11 @@ def cc_library(name, deps=None, *args, **kwargs):
     # Remove third-party dependencies
     # filtered_deps = [dep for dep in deps if (not dep.startswith("@llvm_"))]
     filtered_deps = [dep for dep in deps if dep[1:] in LLVM_LIBS]
+
     output += f"""
 cc_library(
     name = "{name}",
-    linkopts = {make_linkopts(name)},
+    linkopts = {make_linkopts(name, deps)},
     visibility = ["//visibility:public"],
     deps = {filtered_deps},
 )"""
@@ -140,7 +141,12 @@ def add_link_dependencies(libraries):
 
     return link_opts
 
-def make_linkopts(name):
+def make_linkopts(name, deps):
+    linkopts = do_make_linkopts(name)
+    converted_deps = {f"-l{SYMBOL}{dep[1:]}" for dep in deps}
+    return [opt for opt in linkopts if opt not in converted_deps]
+
+def do_make_linkopts(name):
     fullname = SYMBOL + name
     # Fix the caseing of the library to match the actual file names.
     if fullname.lower() in case_lookup:
@@ -165,7 +171,7 @@ def make_linkopts(name):
     elif upper_match is not None:
         name = upper_match.group(1)
         if len(name) > 1:
-            return make_linkopts(name)
+            return do_make_linkopts(name)
     return []
 
 
@@ -252,7 +258,7 @@ def cc_library(name, deps=None, *args, **kwargs):
     output += f"""
 cc_library(
     name = "{name}",
-    linkopts = {make_linkopts(name)},
+    linkopts = {make_linkopts(name, deps)},
     visibility = ["//visibility:public"],
     deps = {filtered_deps},
 )"""
@@ -324,7 +330,7 @@ filegroup(
 
 cc_library(
     name = "{name}",
-    linkopts = {make_linkopts(name)},
+    linkopts = {make_linkopts(name, [])},
     visibility = ["//visibility:public"],
     textual_hdrs = [":{name}_filegroup"],
 )"""
