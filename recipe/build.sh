@@ -10,6 +10,7 @@ if [[ "${target_platform}" != "${build_platform}" ]]; then
     cp -r llvm-build/bin/mlir-tblgen $BUILD_PREFIX/bin/
     cp -r llvm-build/bin/mlir-linalg-ods-yaml-gen $BUILD_PREFIX/bin/
     cp -r llvm-build/include/llvm $BUILD_PREFIX/include/
+    cp -r llvm-build/include/llvm-c $BUILD_PREFIX/include/
     cp -r llvm-build/include/mlir $BUILD_PREFIX/include/
     cp -r llvm-build/lib/libMLIR* $BUILD_PREFIX/lib
     cp -r llvm-build/lib/libLLVM* $BUILD_PREFIX/lib
@@ -82,7 +83,9 @@ export BAZEL_MKL_OPT=""
 
 mkdir -p ./bazel_output_base
 export BAZEL_OPTS=""
-export CC_OPT_FLAGS="${CFLAGS}"
+# We need to pass in something here to get past ./configure.
+# This shouldn't be the host CFLAGS as these are also passed to the build commands.
+export CC_OPT_FLAGS="-g0"
 
 # Quick debug:
 # cp -r ${RECIPE_DIR}/build.sh . && bazel clean && bash -x build.sh --logging=6 | tee log.txt
