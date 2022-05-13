@@ -9,8 +9,8 @@ ENV MINIFORGE_HOME="./miniforge3"
 
 RUN \
     set -xeo pipefail \
-    FEEDSTOCK_ROOT="./" \
+    FEEDSTOCK_ROOT="." \
     RECIPE_ROOT="${FEEDSTOCK_ROOT}/recipe" \
     ARTIFACTS="$FEEDSTOCK_ROOT/build_artifacts" \
     mkdir -p "$ARTIFACTS" \
-    bash "/home/conda/feedstock_root/${PROVIDER_DIR}/build_steps.sh" \
+    bash "${FEEDSTOCK_ROOT}/.scripts/build_steps.sh" \
