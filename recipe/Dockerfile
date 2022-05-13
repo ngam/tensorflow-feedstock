@@ -13,8 +13,8 @@ RUN \
     PROVIDER_DIR="$(basename $THISDIR)" \
     FEEDSTOCK_ROOT="$( cd "$( dirname "$0" )/.." >/dev/null && pwd )" \
     RECIPE_ROOT="${FEEDSTOCK_ROOT}/recipe" \
-    if [ -z ${FEEDSTOCK_NAME} ]; then \
-        export FEEDSTOCK_NAME=$(basename ${FEEDSTOCK_ROOT}) \
+    if [ -z ${FEEDSTOCK_NAME} ]; then
+        export FEEDSTOCK_NAME=$(basename ${FEEDSTOCK_ROOT})
     fi \
     ARTIFACTS="$FEEDSTOCK_ROOT/build_artifacts" \
     mkdir -p "$ARTIFACTS" \
