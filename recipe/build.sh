@@ -92,7 +92,8 @@ BUILD_OPTS="
     --define=PREFIX=${PREFIX}
     --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
     --config=noaws
-    --cpu=${TARGET_CPU}"
+    --cpu=${TARGET_CPU}
+    --local_cpu_resources=${CPU_COUNT}"
 
 if [[ "${target_platform}" == "osx-arm64" ]]; then
   BUILD_OPTS="${BUILD_OPTS} --config=macos_arm64"
