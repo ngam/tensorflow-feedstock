@@ -16,10 +16,10 @@ source:
     folder: tensorflow-estimator
 
   - url: https://github.com/tensorflow/io/archive/refs/tags/v{{ io_gcs_version }}.tar.gz
-     sha256: 7a4b57f6f438402bab4919c360e931c32f4d8d8afa23116d32a48461dddd91dc
-     folder: tensorflow-io
-     patches:
-        - patches/0002-update-tensorflow-io-workspace-for-rules_python-0.5.0.patch
+    sha256: 7a4b57f6f438402bab4919c360e931c32f4d8d8afa23116d32a48461dddd91dc
+    folder: tensorflow-io
+    patches:
+      - patches/0002-update-tensorflow-io-workspace-for-rules_python-0.5.0.patch
 
 build:
   number: 0
