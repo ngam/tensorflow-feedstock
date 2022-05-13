@@ -22,7 +22,6 @@ RUN \
     rm -f "$DONE_CANARY" \
     export UPLOAD_PACKAGES="${UPLOAD_PACKAGES:-True}" \
     export IS_PR_BUILD="${IS_PR_BUILD:-False}" \
-    docker pull "${DOCKER_IMAGE}"
     bash \
         "/home/conda/feedstock_root/${PROVIDER_DIR}/build_steps.sh" \
     test -f "$DONE_CANARY"
