@@ -1,0 +1,19 @@
+name: build-locally
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+    - name: run
+      run: |
+        python build-locally.py linux_64_c_compiler_version10cuda_compiler_version11.2cudnn8cxx_compiler_version10openssl1.1.1python3.10.____cpython
