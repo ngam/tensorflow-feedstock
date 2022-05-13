@@ -15,10 +15,4 @@ RUN \
     RECIPE_ROOT="${FEEDSTOCK_ROOT}/recipe" \
     ARTIFACTS="$FEEDSTOCK_ROOT/build_artifacts" \
     mkdir -p "$ARTIFACTS" \
-    DONE_CANARY="$ARTIFACTS/conda-forge-build-done-${CONFIG}" \
-    rm -f "$DONE_CANARY" \
-    export UPLOAD_PACKAGES="${UPLOAD_PACKAGES:-True}" \
-    export IS_PR_BUILD="${IS_PR_BUILD:-False}" \
-    bash \
-        "/home/conda/feedstock_root/${PROVIDER_DIR}/build_steps.sh" \
-    test -f "$DONE_CANARY"
+    bash "/home/conda/feedstock_root/${PROVIDER_DIR}/build_steps.sh" \
