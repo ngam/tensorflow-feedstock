@@ -20,7 +20,7 @@ jobs:
       with:
         path: "~/.cache/bazel"
         key: bazel
-    - run: bazel build //...
+    # - run: bazel build //...
     - name: run
       run: |
         # docker run -u 1000:1000 -v /tmp:/data -p 9090:8080 -p 9092:9092 quay.io/bazel-remote/bazel-remote
