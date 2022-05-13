@@ -8,7 +8,7 @@ ENV BUILD_WITH_CONDA_DEBUG="0"
 ENV MINIFORGE_HOME="./miniforge3"
 
 RUN \
-    set -xeo pipefail
+    set -xeo pipefail \
     THISDIR="$( cd "$( dirname "$0" )" >/dev/null && pwd )" \
     PROVIDER_DIR="$(basename $THISDIR)" \
     FEEDSTOCK_ROOT="$( cd "$( dirname "$0" )/.." >/dev/null && pwd )" \
