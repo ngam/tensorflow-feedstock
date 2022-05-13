@@ -9,9 +9,7 @@ ENV MINIFORGE_HOME="./miniforge3"
 
 RUN \
     set -xeo pipefail \
-    THISDIR="$( cd "$( dirname "$0" )" >/dev/null && pwd )" \
-    PROVIDER_DIR="$(basename $THISDIR)" \
-    FEEDSTOCK_ROOT="$( cd "$( dirname "$0" )/.." >/dev/null && pwd )" \
+    FEEDSTOCK_ROOT="./" \
     RECIPE_ROOT="${FEEDSTOCK_ROOT}/recipe" \
     ARTIFACTS="$FEEDSTOCK_ROOT/build_artifacts" \
     mkdir -p "$ARTIFACTS" \
