@@ -16,4 +16,5 @@ jobs:
         python-version: 3.9
     - name: run
       run: |
+        docker run -u 1000:1000 -v /tmp:/data -p 9090:8080 -p 9092:9092 quay.io/bazel-remote/bazel-remote
         python build-locally.py linux_64_c_compiler_version10cuda_compiler_version11.2cudnn8cxx_compiler_version10python3.10.____cpython
