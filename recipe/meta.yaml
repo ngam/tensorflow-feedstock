@@ -292,35 +292,35 @@ outputs:
         - pip check
 
   - name: tensorflow-io-gcs-filesystem
-     version: {{ io_gcs_version }}
-     script: build_io_gcs_fs.sh   # [not win]
-     build:
-       string: cuda{{ cuda_compiler_version | replace('.', '') }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
-       string: cpu_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
-     requirements:
-       build:
-         - {{ compiler('c') }}
-         - {{ compiler('cxx') }}
-         - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
-         - bazel
-         - bazel >=4.2.1  # [osx and arm64]
-       host:
-         - python
-         - pip
-         - setuptools
-         - wheel
-         - openssl
-         - {{ pin_subpackage('tensorflow-base', exact=True) }}
-         - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
-       run:
-         - python
-         - {{ pin_subpackage('tensorflow-base', exact=True) }}
-         - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
-     test:
-       requires:
-         - pip
-       commands:
-         - pip check
+    version: {{ io_gcs_version }}
+    script: build_io_gcs_fs.sh   # [not win]
+    build:
+      string: cuda{{ cuda_compiler_version | replace('.', '') }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
+      string: cpu_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
+        - bazel
+        - bazel >=4.2.1  # [osx and arm64]
+      host:
+        - python
+        - pip
+        - setuptools
+        - wheel
+        - openssl
+        - {{ pin_subpackage('tensorflow-base', exact=True) }}
+        - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
+      run:
+        - python
+        - {{ pin_subpackage('tensorflow-base', exact=True) }}
+        - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
 
 
   - name: libtensorflow
