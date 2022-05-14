@@ -1,5 +1,5 @@
 {% set version = "2.8.0" %}
-{% set io_gcs_version = "0.24.0" %}
+{% set io_gcs_version = "0.25.0" %}
 
 package:
   name: tensorflow-split
@@ -16,7 +16,7 @@ source:
     folder: tensorflow-estimator
 
   - url: https://github.com/tensorflow/io/archive/refs/tags/v{{ io_gcs_version }}.tar.gz
-    sha256: 7a4b57f6f438402bab4919c360e931c32f4d8d8afa23116d32a48461dddd91dc
+    sha256: ce63181f6b98dcfaac4b88466b29d2450a5a6676d0c52e9926c0d7133b667131
     folder: tensorflow-io
     patches:
       - patches/0002-update-tensorflow-io-workspace-for-rules_python-0.5.0.patch
@@ -215,9 +215,9 @@ outputs:
         - keras >=2.8,<2.9
         # avoid that people without GPUs needlessly download ~0.5-1GB
         - __cuda  # [cuda_compiler_version != "None"]
-    # TODO: decide on the name of the package
-    run_constrained:
-      - tensorflow-io >=0.21.0
+        # TODO: decide on the name of the package
+      run_constrained:
+        - tensorflow-io >=0.21.0
 
   - name: tensorflow
     build:

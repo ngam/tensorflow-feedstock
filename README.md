@@ -245,6 +245,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-tensorflow--cpu-green.svg)](https://anaconda.org/conda-forge/tensorflow-cpu) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/tensorflow-cpu.svg)](https://anaconda.org/conda-forge/tensorflow-cpu) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/tensorflow-cpu.svg)](https://anaconda.org/conda-forge/tensorflow-cpu) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/tensorflow-cpu.svg)](https://anaconda.org/conda-forge/tensorflow-cpu) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-tensorflow--estimator-green.svg)](https://anaconda.org/conda-forge/tensorflow-estimator) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/tensorflow-estimator.svg)](https://anaconda.org/conda-forge/tensorflow-estimator) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/tensorflow-estimator.svg)](https://anaconda.org/conda-forge/tensorflow-estimator) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/tensorflow-estimator.svg)](https://anaconda.org/conda-forge/tensorflow-estimator) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-tensorflow--gpu-green.svg)](https://anaconda.org/conda-forge/tensorflow-gpu) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/tensorflow-gpu.svg)](https://anaconda.org/conda-forge/tensorflow-gpu) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/tensorflow-gpu.svg)](https://anaconda.org/conda-forge/tensorflow-gpu) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/tensorflow-gpu.svg)](https://anaconda.org/conda-forge/tensorflow-gpu) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-tensorflow--io--gcs--filesystem-green.svg)](https://anaconda.org/conda-forge/tensorflow-io-gcs-filesystem) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/tensorflow-io-gcs-filesystem.svg)](https://anaconda.org/conda-forge/tensorflow-io-gcs-filesystem) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/tensorflow-io-gcs-filesystem.svg)](https://anaconda.org/conda-forge/tensorflow-io-gcs-filesystem) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/tensorflow-io-gcs-filesystem.svg)](https://anaconda.org/conda-forge/tensorflow-io-gcs-filesystem) |
 
 Installing tensorflow
 =====================
@@ -256,16 +257,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `libtensorflow, libtensorflow_cc, tensorflow, tensorflow-base, tensorflow-cpu, tensorflow-estimator, tensorflow-gpu` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `libtensorflow, libtensorflow_cc, tensorflow, tensorflow-base, tensorflow-cpu, tensorflow-estimator, tensorflow-gpu, tensorflow-io-gcs-filesystem` can be installed with `conda`:
 
 ```
-conda install libtensorflow libtensorflow_cc tensorflow tensorflow-base tensorflow-cpu tensorflow-estimator tensorflow-gpu
+conda install libtensorflow libtensorflow_cc tensorflow tensorflow-base tensorflow-cpu tensorflow-estimator tensorflow-gpu tensorflow-io-gcs-filesystem
 ```
 
 or with `mamba`:
 
 ```
-mamba install libtensorflow libtensorflow_cc tensorflow tensorflow-base tensorflow-cpu tensorflow-estimator tensorflow-gpu
+mamba install libtensorflow libtensorflow_cc tensorflow tensorflow-base tensorflow-cpu tensorflow-estimator tensorflow-gpu tensorflow-io-gcs-filesystem
 ```
 
 It is possible to list all of the versions of `libtensorflow` available on your platform with `conda`:
