@@ -215,9 +215,9 @@ outputs:
         - keras >=2.8,<2.9
         # avoid that people without GPUs needlessly download ~0.5-1GB
         - __cuda  # [cuda_compiler_version != "None"]
-    # TODO: decide on the name of the package
-    run_constrained:
-      - tensorflow-io >=0.21.0
+      # TODO: decide on the name of the package
+      run_constrained:
+        - tensorflow-io >=0.21.0
 
   - name: tensorflow
     build:
