@@ -2,6 +2,8 @@
 
 set -ex
 
+pushd tensorflow-io
+
 export PATH="$PWD:$PATH"
 export CC=$(basename $CC)
 export CXX=$(basename $CXX)
