@@ -91,7 +91,6 @@ BUILD_OPTS="
     --verbose_failures
     --define=PREFIX=${PREFIX}
     --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
-    --config=noaws
     --cpu=${TARGET_CPU}
     --local_cpu_resources=${CPU_COUNT}"
 
