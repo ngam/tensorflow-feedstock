@@ -89,7 +89,6 @@ BUILD_OPTS="
     --crosstool_top=//custom_toolchain:toolchain
     --logging=6
     --verbose_failures
-    --config=opt
     --define=PREFIX=${PREFIX}
     --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
     --config=noaws
