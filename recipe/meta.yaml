@@ -1,5 +1,4 @@
 {% set version = "2.8.0" %}
-{% set io_gcs_version = "0.25.0" %}
 
 package:
   name: tensorflow-split
@@ -14,12 +13,6 @@ source:
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ version }}.tar.gz
     sha256: 58a2c3562ca6491c257e9a4d9bd8825667883257edcdb452181efa691c586b17
     folder: tensorflow-estimator
-
-  - url: https://github.com/tensorflow/io/archive/refs/tags/v{{ io_gcs_version }}.tar.gz
-    sha256: ce63181f6b98dcfaac4b88466b29d2450a5a6676d0c52e9926c0d7133b667131
-    folder: tensorflow-io
-    patches:
-      - patches/0002-update-tensorflow-io-workspace-for-rules_python-0.5.0.patch
 
 build:
   number: 0
@@ -215,9 +208,6 @@ outputs:
         - keras >=2.8,<2.9
         # avoid that people without GPUs needlessly download ~0.5-1GB
         - __cuda  # [cuda_compiler_version != "None"]
-        # TODO: decide on the name of the package
-      run_constrained:
-        - tensorflow-io >=0.21.0
 
   - name: tensorflow
     build:
@@ -234,7 +224,6 @@ outputs:
         - python
         - {{ pin_subpackage('tensorflow-base', exact=True) }}
         - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
-        - {{ pin_subpackage('tensorflow-io', exact=True) }}
         # avoid that people without GPUs needlessly download ~0.5-1GB
         # This also helps mamba give preference to the CPU build
         - __cuda  # [cuda_compiler_version != "None"]
@@ -289,39 +278,6 @@ outputs:
       commands:
         - pip check
 
-  - name: tensorflow-io
-    version: {{ io_gcs_version }}
-    script: build_io_gcs_fs.sh   # [not win]
-    build:
-      string: cuda{{ cuda_compiler_version | replace('.', '') }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version != "None"]
-      string: cpu_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}  # [cuda_compiler_version == "None"]
-    requirements:
-      build:
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
-        - bazel
-        - bazel >=4.2.1  # [osx and arm64]
-      host:
-        - python
-        - pip
-        - setuptools
-        - wheel
-        - openssl
-        - {{ pin_subpackage('tensorflow-base', exact=True) }}
-        - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
-      run:
-        - python
-        - {{ pin_subpackage('tensorflow-base', exact=True) }}
-        - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
-    test:
-      requires:
-        - pip
-      commands:
-        - pip check
-      imports:
-        - tensorflow_io
-        - tensorflow_io.audio
 
   - name: libtensorflow
     script: cp_libtensorflow.sh
