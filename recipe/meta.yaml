@@ -216,10 +216,8 @@ outputs:
         # avoid that people without GPUs needlessly download ~0.5-1GB
         - __cuda  # [cuda_compiler_version != "None"]
     # TODO: decide on the name of the package
-    # run_constrained:
-    #   What is the difference between these two packages?
-    #   - tensorflow-io-gcs-filesystem >=0.21.0
-    #   - tensorflow-io >=0.21.0
+    run_constrained:
+      - tensorflow-io >=0.21.0
 
   - name: tensorflow
     build:
@@ -236,7 +234,7 @@ outputs:
         - python
         - {{ pin_subpackage('tensorflow-base', exact=True) }}
         - {{ pin_subpackage('tensorflow-estimator', exact=True) }}
-        - {{ pin_subpackage('tensorflow-io-gcs-filesystem', exact=True) }}
+        - {{ pin_subpackage('tensorflow-io', exact=True) }}
         # avoid that people without GPUs needlessly download ~0.5-1GB
         # This also helps mamba give preference to the CPU build
         - __cuda  # [cuda_compiler_version != "None"]
@@ -291,7 +289,7 @@ outputs:
       commands:
         - pip check
 
-  - name: tensorflow-io-gcs-filesystem
+  - name: tensorflow-io
     version: {{ io_gcs_version }}
     script: build_io_gcs_fs.sh   # [not win]
     build:
@@ -321,7 +319,9 @@ outputs:
         - pip
       commands:
         - pip check
-
+      imports:
+        - tensorflow_io
+        - tensorflow_io.audio
 
   - name: libtensorflow
     script: cp_libtensorflow.sh
