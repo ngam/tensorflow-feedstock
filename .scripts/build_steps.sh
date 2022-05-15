@@ -28,15 +28,15 @@ conda-build:
 
 CONDARC
 
-export PATH="$PATH":/opt/conda/condabin \
-env > envvar \
-mamba init \
-source ~/.bashrc \
-mamba create --prefix=/tmp/building --yes --quiet \
-mamba activate /tmp/building \
-# conda clean --packages --yes --quiet \
-sed 's/^/"/;s/$/"/' envvar > envvarmod \
-sed 's/^/export /' envvarmod > envvarmodmod \
+export PATH="$PATH":/opt/conda/condabin
+env > envvar
+mamba init
+source ~/.bashrc
+mamba create --prefix=/tmp/building --yes --quiet
+mamba activate /tmp/building
+# conda clean --packages --yes --quiet
+sed 's/^/"/;s/$/"/' envvar > envvarmod
+sed 's/^/export /' envvarmod > envvarmodmod
 source ./envvarmodmod
 
 mamba install --update-specs --yes --quiet --channel conda-forge \

@@ -7,25 +7,5 @@ ENV IS_PR_BUILD="True"
 ENV BUILD_WITH_CONDA_DEBUG="0"
 ENV MINIFORGE_HOME="./miniforge3"
 
-# RUN \
-#     export PATH="$PATH":/opt/conda/condabin \
-#     env > envvar \
-#     mamba init \
-#     source ~/.bashrc \
-#     mamba create --prefix=/tmp/building --yes --quiet \
-#     mamba activate /tmp/building \
-#     # conda clean --packages --yes --quiet \
-#     sed 's/^/"/;s/$/"/' envvar > envvarmod \
-#     sed 's/^/export /' envvarmod > envvarmodmod \
-#     source ./envvarmodmod
-
 ADD . /home/conda/feedstock_root/
 RUN /home/conda/feedstock_root/.scripts/build_steps.sh
-
-# RUN \
-#     set -xeo pipefail \
-#     FEEDSTOCK_ROOT="." \
-#     RECIPE_ROOT="${FEEDSTOCK_ROOT}/recipe" \
-#     ARTIFACTS="$FEEDSTOCK_ROOT/build_artifacts" \
-#     mkdir -p "$ARTIFACTS" \
-#     bash "${FEEDSTOCK_ROOT}/.scripts/build_steps.sh" \
