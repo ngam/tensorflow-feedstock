@@ -7,8 +7,8 @@ ENV IS_PR_BUILD="True"
 ENV BUILD_WITH_CONDA_DEBUG="0"
 ENV MINIFORGE_HOME="./miniforge3"
 
-COPY . /tmp/
-RUN /tmp/.scripts/build_steps.sh
+ADD . /home/conda/feedstock_root/
+RUN /home/conda/feedstock_root/.scripts/build_steps.sh
 
 # RUN \
 #     set -xeo pipefail \
