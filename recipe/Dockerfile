@@ -7,6 +7,8 @@ ENV IS_PR_BUILD="True"
 ENV BUILD_WITH_CONDA_DEBUG="0"
 ENV MINIFORGE_HOME="./miniforge3"
 
+RUN .scripts/build_steps.sh
+
 # RUN \
 #     set -xeo pipefail \
 #     FEEDSTOCK_ROOT="." \
