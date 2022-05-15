@@ -29,6 +29,7 @@ conda-build:
 CONDARC
 
 export PATH="$PATH":/opt/conda/condabin
+rm -rf ~/.bashrc
 env > envvar
 mamba init
 source ~/.bashrc
