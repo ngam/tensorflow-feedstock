@@ -7,8 +7,8 @@ package:
 source:
   - url: https://github.com/tensorflow/tensorflow/archive/refs/tags/v{{ version }}.tar.gz
     sha256: 8087cb0c529f04a4bfe480e49925cd64a904ad16d8ec66b98e2aacdfd53c80ff
-    patches:
-      - patches/0001-loosen-requirements.patch
+    # patches:
+    #   - patches/0001-loosen-requirements.patch
 
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ version }}.tar.gz
     sha256: 58a2c3562ca6491c257e9a4d9bd8825667883257edcdb452181efa691c586b17
