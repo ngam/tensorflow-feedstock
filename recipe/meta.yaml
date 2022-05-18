@@ -9,6 +9,10 @@ source:
     sha256: 8087cb0c529f04a4bfe480e49925cd64a904ad16d8ec66b98e2aacdfd53c80ff
     # patches:
     #   - patches/0001-loosen-requirements.patch
+    # Slated for 2.9.0 release
+    # https://github.com/tensorflow/tensorflow/commit/613bcf9f92750bebf88b5f119da8bce83acb4b47
+    - patches/0002-Remove_dependency_on_implementation_ofRepeatedField_iterator.patch
+    - patches/0003-Remove_dependency_on_implementation_ofRepeatedField_iterator.patch
 
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ version }}.tar.gz
     sha256: 62d7b5a574d9c995542f6cb485ff1c18ad115afd9ec6d63437b2aab227c35ef6
@@ -18,6 +22,10 @@ build:
   number: 0
   skip: true  # [win]
   skip: true  # [python_impl == 'pypy']
+  # Tensorflow still hasn't updated from C++14.
+  # Newer versions of abseil_cpp require C++17
+  # This may be a possibility in 2.9.0
+  skip: true  # [abseil_cpp != '20210324.2']
 
 requirements:
   build:
@@ -71,7 +79,7 @@ requirements:
     # but so far there have been no problems with leaving these
     # unpinned; though some restrictions come in for packages
     # that are also listed as a requirement for the pip_package.
-    - abseil-cpp 20210324.2
+    - abseil-cpp
     - astor
     - cython
     - dill
@@ -108,8 +116,8 @@ requirements:
     - typing_extensions >=3.6.6
     - wrapt >=1.11.0
     # TF-API needs to move in sync
-    - tensorboard >=2.8,<2.9
-    - keras >=2.8,<2.9
+    - tensorboard >=2.9,<2.10
+    - keras >=2.9,<2.10
 
 outputs:
   # 2021/12/29: hmaarrfk
@@ -150,7 +158,7 @@ outputs:
         - pip
         - wheel
         # TF_SYSTEM_LIBS
-        - abseil-cpp 20210324.2
+        - abseil-cpp
         - astor
         - cython
         - dill
@@ -184,8 +192,8 @@ outputs:
         - typing_extensions >=3.6.6
         - wrapt >=1.11.0
         # TF-API needs to move in sync
-        - tensorboard >=2.8,<2.9
-        - keras >=2.8,<2.9
+        - tensorboard >=2.9,<2.10
+        - keras >=2.9,<2.10
       run:
         - python
         - absl-py >=0.4.0
@@ -204,8 +212,8 @@ outputs:
         - typing_extensions >=3.6.6
         - wrapt >=1.11.0
         # TF-API needs to move in sync
-        - tensorboard >=2.8,<2.9
-        - keras >=2.8,<2.9
+        - tensorboard >=2.9,<2.10
+        - keras >=2.9,<2.10
         # avoid that people without GPUs needlessly download ~0.5-1GB
         - __cuda  # [cuda_compiler_version != "None"]
 

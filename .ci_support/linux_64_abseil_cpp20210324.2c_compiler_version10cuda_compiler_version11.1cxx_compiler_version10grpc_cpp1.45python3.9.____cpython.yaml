@@ -1,3 +1,5 @@
+abseil_cpp:
+- '20210324.2'
 c_compiler:
 - gcc
 c_compiler_version:
@@ -23,7 +25,7 @@ docker_image:
 giflib:
 - '5.2'
 grpc_cpp:
-- '1.43'
+- '1.45'
 icu:
 - '70'
 jpeg:
@@ -33,7 +35,7 @@ libcurl:
 libpng:
 - '1.6'
 libprotobuf:
-- '3.19'
+- '3.20'
 nccl:
 - '2'
 openssl:
@@ -63,11 +65,13 @@ sqlite:
 target_platform:
 - linux-64
 zip_keys:
+- - abseil_cpp
+  - grpc_cpp
 - - c_compiler_version
-  - cxx_compiler_version
-  - cudnn
-  - cuda_compiler_version
   - cdt_name
+  - cuda_compiler_version
+  - cudnn
+  - cxx_compiler_version
   - docker_image
 - - python
   - python_impl

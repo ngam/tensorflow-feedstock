@@ -1,7 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
-MACOSX_SDK_VERSION:
-- '10.13'
+- '11.0'
+abseil_cpp:
+- '20210324.2'
 c_compiler:
 - clang
 c_compiler_version:
@@ -19,7 +19,7 @@ cxx_compiler_version:
 giflib:
 - '5.2'
 grpc_cpp:
-- '1.43'
+- '1.45'
 icu:
 - '70'
 jpeg:
@@ -29,9 +29,9 @@ libcurl:
 libpng:
 - '1.6'
 libprotobuf:
-- '3.19'
+- '3.20'
 macos_machine:
-- x86_64-apple-darwin13.4.0
+- arm64-apple-darwin20.0.0
 openssl:
 - 1.1.1
 pin_run_as_build:
@@ -49,7 +49,7 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- 3.8.* *_cpython
+- 3.9.* *_cpython
 python_impl:
 - cpython
 snappy:
@@ -57,8 +57,10 @@ snappy:
 sqlite:
 - '3'
 target_platform:
-- osx-64
+- osx-arm64
 zip_keys:
+- - abseil_cpp
+  - grpc_cpp
 - - c_compiler_version
   - cxx_compiler_version
 - - python
