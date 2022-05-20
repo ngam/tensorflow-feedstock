@@ -33,7 +33,7 @@ requirements:
     - jpeg                                   # [build_platform != target_platform]
     - icu                                    # [build_platform != target_platform]
     - libpng                                 # [build_platform != target_platform]
-    - flatbuffers <2.0.6                     # [build_platform != target_platform]
+    - flatbuffers <2                        # [build_platform != target_platform]
     - onednn                                 # [build_platform != target_platform]
     - onednn-cpu-threadpool                  # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
@@ -85,7 +85,7 @@ requirements:
     # 2022/04/25 hmaarrfk
     # the latest flatbuffers 2.0.6 seems to have removed a sybmol in a patch release...
     # https://github.com/Qengineering/TensorFlow_Lite_Pose_RPi_64-bits/issues/3#issuecomment-1034799822
-    - flatbuffers <2.0.6
+    - flatbuffers <2
     - icu
     - jpeg
     - libpng
@@ -99,7 +99,7 @@ requirements:
     # github.com/tensorflow/tensorflow/blob/v{{ version }}/tensorflow/tools/pip_package/setup.py
     - absl-py >=0.4.0
     - astunparse >=1.6.0
-    - gast >=0.2.1
+    - gast >=0.2.1,<=0.4.0
     - google-pasta >=0.1.1
     - h5py >=2.9.0
     - keras-preprocessing >=1.1.1
@@ -162,7 +162,7 @@ outputs:
         - dill
         - giflib
         - grpc-cpp
-        - flatbuffers <2.0.6
+        - flatbuffers <2
         - icu
         - jpeg
         - libcurl
@@ -176,7 +176,7 @@ outputs:
         # requirements specified by the package itself
         - absl-py >=0.4.0
         - astunparse >=1.6.0
-        - gast >=0.2.1,<0.5.0
+        - gast >=0.2.1,<0.4.0
         - google-pasta >=0.1.1
         - h5py >=2.9.0
         - keras-preprocessing >=1.1.1
@@ -194,9 +194,10 @@ outputs:
         - keras >=2.9,<2.10
       run:
         - python
+        - packaging
         - absl-py >=0.4.0
         - astunparse >=1.6.0
-        - gast >=0.2.1
+        - gast >=0.2.1,<=0.4.0
         - google-pasta >=0.1.1
         - grpcio {{ grpc_cpp }}.*
         - h5py >=2.9.0
