@@ -153,6 +153,7 @@ outputs:
         # conda build requirements
         - python
         - pip
+        - packaging
         - wheel
         # TF_SYSTEM_LIBS
         - abseil-cpp
@@ -267,6 +268,7 @@ outputs:
       host:
         - python
         - pip
+        - packaging
         - setuptools
         - wheel
         # This ensures that a consistent version of openssl is chosen between
