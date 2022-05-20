@@ -58,6 +58,7 @@ requirements:
     # conda build requirements
     - python
     - pip
+    - packaging
     - zlib
     - libpng
     - libcurl
