@@ -7,8 +7,8 @@ package:
 source:
   - url: https://github.com/tensorflow/tensorflow/archive/refs/tags/v{{ version }}.tar.gz
     sha256: 8087cb0c529f04a4bfe480e49925cd64a904ad16d8ec66b98e2aacdfd53c80ff
-    # patches:
-    #   - patches/0001-loosen-requirements.patch
+    patches:
+      - patches/0001-loosen-requirements.patch
 
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ version }}.tar.gz
     sha256: 62d7b5a574d9c995542f6cb485ff1c18ad115afd9ec6d63437b2aab227c35ef6
@@ -18,10 +18,10 @@ build:
   number: 0
   skip: true  # [win]
   skip: true  # [python_impl == 'pypy']
-  # # Tensorflow still hasn't updated from C++14.
-  # # Newer versions of abseil_cpp require C++17
-  # # This may be a possibility in 2.9.0
-  # skip: true  # [abseil_cpp != '20210324.2']
+  # Tensorflow still hasn't updated from C++14.
+  # Newer versions of abseil_cpp require C++17
+  # This may be a possibility in 2.9.0
+  skip: true  # [abseil_cpp != '20210324.2']
 
 requirements:
   build:
