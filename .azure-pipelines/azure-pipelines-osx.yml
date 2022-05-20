@@ -20,18 +20,6 @@ jobs:
       osx_64_abseil_cpp20210324.2grpc_cpp1.45python3.9.____cpython:
         CONFIG: osx_64_abseil_cpp20210324.2grpc_cpp1.45python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.10.____cpython:
-        CONFIG: osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-      osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.7.____cpython:
-        CONFIG: osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.8.____cpython:
-        CONFIG: osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.9.____cpython:
-        CONFIG: osx_64_abseil_cpp20211102.0grpc_cpp1.46python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
       osx_arm64_abseil_cpp20210324.2grpc_cpp1.45python3.10.____cpython:
         CONFIG: osx_arm64_abseil_cpp20210324.2grpc_cpp1.45python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -41,16 +29,6 @@ jobs:
       osx_arm64_abseil_cpp20210324.2grpc_cpp1.45python3.9.____cpython:
         CONFIG: osx_arm64_abseil_cpp20210324.2grpc_cpp1.45python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_abseil_cpp20211102.0grpc_cpp1.46python3.10.____cpython:
-        CONFIG: osx_arm64_abseil_cpp20211102.0grpc_cpp1.46python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-      osx_arm64_abseil_cpp20211102.0grpc_cpp1.46python3.8.____cpython:
-        CONFIG: osx_arm64_abseil_cpp20211102.0grpc_cpp1.46python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      osx_arm64_abseil_cpp20211102.0grpc_cpp1.46python3.9.____cpython:
-        CONFIG: osx_arm64_abseil_cpp20211102.0grpc_cpp1.46python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-    maxParallel: 13
   timeoutInMinutes: 360
 
   steps:
