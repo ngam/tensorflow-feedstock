@@ -21,7 +21,7 @@ build:
   # Tensorflow still hasn't updated from C++14.
   # Newer versions of abseil_cpp require C++17
   # This may be a possibility in 2.9.0
-  skip: true  # [abseil_cpp != '20210324.2']
+  skip: true  # [abseil_cpp != '20211102.0']
 
 requirements:
   build:
