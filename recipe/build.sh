@@ -98,7 +98,13 @@ BUILD_OPTS="
 if [[ "${target_platform}" == "osx-arm64" ]]; then
   BUILD_OPTS="${BUILD_OPTS} --config=macos_arm64"
 fi
-export TF_ENABLE_XLA=1
+
+if [[ "${target_platform}" == osx-* ]]; then
+    export TF_ENABLE_XLA=0
+else
+    export TF_ENABLE_XLA=1
+fi
+
 export BUILD_TARGET="//tensorflow/tools/pip_package:build_pip_package //tensorflow/tools/lib_package:libtensorflow //tensorflow:libtensorflow_cc${SHLIB_EXT}"
 
 # Python settings
