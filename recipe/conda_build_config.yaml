@@ -3,10 +3,6 @@
 # available on 10.13
 MACOSX_SDK_VERSION:        # [osx and x86_64]
   - "10.13"                # [osx and x86_64]
-c_compiler_version:        # [osx]
-  - 11                     # [osx]
-cxx_compiler_version:      # [osx]
-  - 11                     # [osx]
 # c_compiler_version:        # [linux]
 #   - 9                      # [linux]
 #   - 7                      # [os.environ.get("CF_CUDA_ENABLED", "False") == "True" and linux64]

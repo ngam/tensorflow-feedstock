@@ -1,0 +1,45 @@
+From d1fadefe3bb1e6303ded390485744a31e12448aa Mon Sep 17 00:00:00 2001
+From: ngam <67342040+ngam@users.noreply.github.com>
+Date: Tue, 21 Jun 2022 21:54:29 +0000
+Subject: [PATCH 2/2] Revert "[XLA] Mark LsbMask as constexpr"
+
+This reverts commit 0b6cc85863c4484586d1317b08d7c42bc8a0640c.
+---
+ tensorflow/compiler/xla/util.h | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
+
+diff --git a/tensorflow/compiler/xla/util.h b/tensorflow/compiler/xla/util.h
+index 49d18f747c1..229b15242b2 100644
+--- a/tensorflow/compiler/xla/util.h
++++ b/tensorflow/compiler/xla/util.h
+@@ -426,14 +426,12 @@ void LogLines(int sev, absl::string_view text, const char* fname, int lineno);
+ 
+ // Returns a mask with "width" number of least significant bits set.
+ template <typename T>
+-constexpr inline T LsbMask(int width) {
++inline T LsbMask(int width) {
+   static_assert(std::is_unsigned<T>::value,
+                 "T should be an unsigned integer type");
+-  if (IsRuntimeEvaluated()) {
+-    DCHECK_GE(width, 0) << "Unsupported width " << width;
+-    DCHECK_LE(width, std::numeric_limits<T>::digits)
+-        << "Unsupported width " << width;
+-  }
++  CHECK_GE(width, 0) << "Unsupported width " << width;
++  CHECK_LE(width, std::numeric_limits<T>::digits)
++      << "Unsupported width " << width;
+   return width == 0
+              ? 0
+              : static_cast<T>(-1) >> (std::numeric_limits<T>::digits - width);
+@@ -457,7 +455,7 @@ constexpr inline int Log2Ceiling(T x) {
+ 
+ // Returns the value with every bit except the lower 'width' bits set to zero.
+ template <typename T>
+-constexpr inline T ClearUpperBits(T value, int width) {
++inline T ClearUpperBits(T value, int width) {
+   return value & LsbMask<T>(width);
+ }
+ 
+-- 
+2.36.1
+
