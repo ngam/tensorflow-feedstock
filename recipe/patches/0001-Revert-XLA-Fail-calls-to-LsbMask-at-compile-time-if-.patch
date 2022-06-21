@@ -13,7 +13,7 @@ diff --git a/tensorflow/compiler/xla/util.h b/tensorflow/compiler/xla/util.h
 index 09cc7d6063e..49d18f747c1 100644
 --- a/tensorflow/compiler/xla/util.h
 +++ b/tensorflow/compiler/xla/util.h
-@@ -424,37 +424,9 @@ std::string HumanReadableNumTranscendentalOps(double trops, double nanoseconds);
+@@ -424,37 +424,10 @@ std::string HumanReadableNumTranscendentalOps(double trops, double nanoseconds);
  // severity, filename, and line number.
  void LogLines(int sev, absl::string_view text, const char* fname, int lineno);
  
@@ -30,7 +30,7 @@ index 09cc7d6063e..49d18f747c1 100644
 -#define XLA_DIAGNOSE_ERROR_IF(...) \
 -  __attribute__((diagnose_if(__VA_ARGS__, "error")))
 -#else
--#define XLA_DIAGNOSE_ERROR_IF(...)
+ #define XLA_DIAGNOSE_ERROR_IF(...)
 -#endif
 -
 -constexpr bool IsRuntimeEvaluated() {
