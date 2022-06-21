@@ -100,7 +100,7 @@ if [[ "${target_platform}" == "osx-arm64" ]]; then
 fi
 
 if [[ "${target_platform}" == osx-* ]]; then
-    export TF_ENABLE_XLA=0
+    export TF_ENABLE_XLA=1
 else
     export TF_ENABLE_XLA=1
 fi
