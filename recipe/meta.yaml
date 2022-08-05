@@ -1,19 +1,19 @@
-{% set version = "2.9.1" %}
-{% set estimator_version = "2.9.0" %}
+{% set version = "2.10.0.rc0" %}
+{% set estimator_version = "2.10.0.rc0" %}
 
 package:
   name: tensorflow-split
   version: {{ version }}
 
 source:
-  - url: https://github.com/tensorflow/tensorflow/archive/refs/tags/v{{ version }}.tar.gz
+  - url: https://github.com/tensorflow/tensorflow/archive/refs/tags/v{{ version.replace(".rc", "-rc") }}.tar.gz
     sha256: 6eaf86ead73e23988fe192da1db68f4d3828bcdd0f3a9dc195935e339c95dbdc
     patches:
       - patches/0001-loosen-requirements.patch
       - patches/fix-absl-stuff.patch
 
 
-  - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ estimator_version }}.tar.gz
+  - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ version.replace(".rc", "-rc") }}.tar.gz
     sha256: 62d7b5a574d9c995542f6cb485ff1c18ad115afd9ec6d63437b2aab227c35ef6
     folder: tensorflow-estimator
 
@@ -98,7 +98,7 @@ requirements:
     - zlib
     # requirements specified by the package itself, see
     # github.com/tensorflow/tensorflow/blob/v{{ version }}/tensorflow/tools/pip_package/setup.py
-    - absl-py >=0.4.0
+    - absl-py >=1.0.0
     - astunparse >=1.6.0
     - gast >=0.2.1,<=0.4.0
     - google-pasta >=0.1.1
@@ -175,7 +175,7 @@ outputs:
         - sqlite
         - zlib
         # requirements specified by the package itself
-        - absl-py >=0.4.0
+        - absl-py >=1.0.0
         - astunparse >=1.6.0
         - gast >=0.2.1,<=0.4.0
         - google-pasta >=0.1.1
@@ -196,7 +196,7 @@ outputs:
       run:
         - python
         - packaging
-        - absl-py >=0.4.0
+        - absl-py >=1.0.0
         - astunparse >=1.6.0
         - gast >=0.2.1,<=0.4.0
         - google-pasta >=0.1.1
