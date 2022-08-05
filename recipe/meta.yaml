@@ -33,7 +33,7 @@ requirements:
     - jpeg                                   # [build_platform != target_platform]
     - icu                                    # [build_platform != target_platform]
     - libpng                                 # [build_platform != target_platform]
-    - flatbuffers <2                         # [build_platform != target_platform]
+    - flatbuffers >=2                        # [build_platform != target_platform]
     - onednn                                 # [build_platform != target_platform]
     - onednn-cpu-threadpool                  # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
@@ -86,7 +86,7 @@ requirements:
     # 2022/04/25 hmaarrfk
     # the latest flatbuffers 2.0.6 seems to have removed a sybmol in a patch release...
     # https://github.com/Qengineering/TensorFlow_Lite_Pose_RPi_64-bits/issues/3#issuecomment-1034799822
-    - flatbuffers <2
+    - flatbuffers >=2
     - icu
     - jpeg
     - libpng
@@ -108,7 +108,7 @@ requirements:
     - numpy 1.21.*  # [py>=310]
     - opt_einsum >=2.3.2
     - protobuf >=3.9.2
-    - python-flatbuffers >=1.12,<2
+    - python-flatbuffers >=2
     - six >=1.12
     - termcolor >=1.1.0
     - typing_extensions >=3.6.6
@@ -163,7 +163,7 @@ outputs:
         - dill
         - giflib
         - grpc-cpp
-        - flatbuffers <2
+        - flatbuffers >=2
         - icu
         - jpeg
         - libcurl
@@ -185,7 +185,7 @@ outputs:
         - numpy 1.21.*  # [py>=310]
         - opt_einsum >=2.3.2
         - protobuf >=3.9.2
-        - python-flatbuffers >=1.12,<2
+        - python-flatbuffers >=2
         - six >=1.12
         - termcolor >=1.1.0
         - typing_extensions >=3.6.6
@@ -206,7 +206,7 @@ outputs:
         - {{ pin_compatible('numpy') }}
         - opt_einsum >=2.3.2
         - protobuf >=3.9.2
-        - python-flatbuffers >=1.12,<2
+        - python-flatbuffers >=2
         - six >=1.12
         - termcolor >=1.1.0
         - typing_extensions >=3.6.6
