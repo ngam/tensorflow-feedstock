@@ -314,7 +314,7 @@ outputs:
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
       # host requirements to pick up run_exports
       host:
-        - abseil-cpp 20211102.0
+        - abseil-cpp
         - giflib
         - grpc-cpp
         - icu
@@ -359,7 +359,7 @@ outputs:
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
       # host requirements to pick up run_exports
       host:
-        - abseil-cpp 20211102.0
+        - abseil-cpp
         - giflib
         - grpc-cpp
         - icu

@@ -26,7 +26,7 @@ toolchain {
   target_system_name: "local"
   cxx_flag: "-stdlib=libc++"
   cxx_flag: "-fvisibility-inlines-hidden"
-  cxx_flag: "-std=c++14"
+  cxx_flag: "-std=c++17"
   cxx_flag: "-fmessage-length=0"
   linker_flag: "-Wl,-pie"
   linker_flag: "-headerpad_max_install_names"
