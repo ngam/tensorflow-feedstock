@@ -13,7 +13,7 @@ source:
 
 
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ estimator_version.replace(".rc", "-rc") }}.tar.gz
-    sha256: 62d7b5a574d9c995542f6cb485ff1c18ad115afd9ec6d63437b2aab227c35ef6
+    sha256: 795449159215969afd1c2325203bfba72d44d2baf2f28eda9cccc2ad2be29a32
     folder: tensorflow-estimator
 
 build:
