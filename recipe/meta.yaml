@@ -1,5 +1,5 @@
 {% set version = "2.10.0.rc0" %}
-{% set estimator_version = "v2.10.rc0" %}
+{% set estimator_version = "2.10.rc0" %}
 
 package:
   name: tensorflow-split
