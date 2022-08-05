@@ -42,7 +42,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
-    - bazel 4.2.2
+    - bazel >=5.2.0
+
     - grpc-cpp
     - libprotobuf
     - nasm
@@ -270,7 +271,8 @@ outputs:
         # decide on the cuda variant
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
-        - bazel 4.2.2
+        - bazel >=5.2.0
+
       host:
         - python
         - pip
