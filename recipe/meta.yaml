@@ -22,6 +22,7 @@ build:
   skip: true  # [python_impl == 'pypy']
   # We specify a version of abseil_cpp that is compatible with C++17
   skip: true  # [abseil_cpp != '20211102.0']
+  skip: true  # [cuda_compiler_version == "10.2"]
 
 requirements:
   build:
