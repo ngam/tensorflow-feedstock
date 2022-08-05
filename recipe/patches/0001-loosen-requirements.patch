@@ -16,7 +16,7 @@ diff --git a/tensorflow/tools/pip_package/setup.py b/tensorflow/tools/pip_packag
 index cdcc355f4a6..b9cfdd6bb60 100644
 --- a/tensorflow/tools/pip_package/setup.py
 +++ b/tensorflow/tools/pip_package/setup.py
-@@ -83,7 +83,6 @@ REQUIRED_PACKAGES = [
+@@ -81,7 +81,6 @@ REQUIRED_PACKAGES = [
      'google_pasta >= 0.1.1',
      'h5py >= 2.9.0',
      'keras_preprocessing >= 1.1.1',  # 1.1.0 needs tensorflow==1.7
@@ -24,7 +24,7 @@ index cdcc355f4a6..b9cfdd6bb60 100644
      'numpy >= 1.20',
      'opt_einsum >= 2.3.2',
      'packaging',
-@@ -94,13 +93,12 @@ REQUIRED_PACKAGES = [
+@@ -92,13 +91,12 @@ REQUIRED_PACKAGES = [
      # See also: https://github.com/protocolbuffers/protobuf/issues/9954
      # See also: https://github.com/tensorflow/tensorflow/issues/56077
      # This is a temporary patch for now, to patch previous TF releases.

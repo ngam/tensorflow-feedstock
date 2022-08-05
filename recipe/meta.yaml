@@ -10,7 +10,6 @@ source:
     sha256: 3bac161442497c1ad5fd44ee7084064c0f5aab2cceb53a34c9345eaaa326a618
     patches:
       - patches/0001-loosen-requirements.patch
-      - patches/fix-absl-stuff.patch
 
 
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ version.replace(".rc", "-rc") }}.tar.gz
