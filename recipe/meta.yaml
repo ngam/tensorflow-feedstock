@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/tensorflow/tensorflow/archive/refs/tags/v{{ version.replace(".rc", "-rc") }}.tar.gz
-    sha256: 6eaf86ead73e23988fe192da1db68f4d3828bcdd0f3a9dc195935e339c95dbdc
+    sha256: 3bac161442497c1ad5fd44ee7084064c0f5aab2cceb53a34c9345eaaa326a618
     patches:
       - patches/0001-loosen-requirements.patch
       - patches/fix-absl-stuff.patch
