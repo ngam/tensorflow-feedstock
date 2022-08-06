@@ -44,7 +44,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
     - bazel >=5.2.0
-
+    - bazel-toolchain
     - grpc-cpp
     - libprotobuf
     - nasm
@@ -273,6 +273,7 @@ outputs:
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
         - bazel >=5.2.0
+        - bazel-toolchain
 
       host:
         - python
