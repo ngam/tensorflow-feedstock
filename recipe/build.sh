@@ -84,20 +84,24 @@ if [[ "${target_platform}" == "osx-64" ]]; then
   export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
-# If you really want to see what is executed, add --subcommands
-BUILD_OPTS="
-    --crosstool_top=//custom_toolchain:toolchain
-    --logging=6
-    --verbose_failures
-    --config=opt
-    --define=PREFIX=${PREFIX}
-    --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
-    --config=noaws
-    --cpu=${TARGET_CPU}
-    --local_cpu_resources=${CPU_COUNT}"
+# Get rid of unwanted defaults
+sed -i -e "/PROTOBUF_INCLUDE_PATH/c\ " .bazelrc
+sed -i -e "/PREFIX/c\ " .bazelrc
+
+cat >> .bazelrc <<EOF
+build --crosstool_top=//custom_toolchain:toolchain
+build --logging=6
+build --verbose_failures
+build --define=PREFIX=${PREFIX}
+build --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
+build --config=noaws
+build --cpu=${TARGET_CPU}
+build --local_cpu_resources=${CPU_COUNT}"
+EOF
 
 if [[ "${target_platform}" == "osx-arm64" ]]; then
   BUILD_OPTS="${BUILD_OPTS} --config=macos_arm64"
+  echo "build --config=macos_arm64" >> .bazelrc
   export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 export TF_ENABLE_XLA=1
@@ -120,10 +124,6 @@ export TF_NEED_MPI=0
 export TF_DOWNLOAD_CLANG=0
 export TF_SET_ANDROID_WORKSPACE=0
 export TF_CONFIGURE_IOS=0
-
-# Get rid of unwanted defaults
-sed -i -e "/PROTOBUF_INCLUDE_PATH/c\ " .bazelrc
-sed -i -e "/PREFIX/c\ " .bazelrc
 
 
 if [[ ${cuda_compiler_version} != "None" ]]; then
