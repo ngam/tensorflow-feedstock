@@ -76,7 +76,11 @@ else
   export LDFLAGS="${LDFLAGS} -lrt"
 fi
 
-source ${RECIPE_DIR}/gen-bazel-toolchain.sh
+# Get rid of unwanted defaults
+sed -i -e "/PROTOBUF_INCLUDE_PATH/c\ " .bazelrc
+sed -i -e "/PREFIX/c\ " .bazelrc
+
+source gen-bazel-toolchain
 
 if [[ "${target_platform}" == "osx-64" ]]; then
   # Tensorflow doesn't cope yet with an explicit architecture (darwin_x86_64) on osx-64 yet.
@@ -85,19 +89,22 @@ if [[ "${target_platform}" == "osx-64" ]]; then
 fi
 
 # If you really want to see what is executed, add --subcommands
-BUILD_OPTS="
-    --crosstool_top=//custom_toolchain:toolchain
-    --logging=6
-    --verbose_failures
-    --config=opt
-    --define=PREFIX=${PREFIX}
-    --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
-    --config=noaws
-    --cpu=${TARGET_CPU}
-    --local_cpu_resources=${CPU_COUNT}"
+
+cat >> .bazelrc <<EOF
+build --crosstool_top=//bazel_toolchain:toolchain
+build --logging=6
+build --verbose_failures
+build --config=opt
+build --toolchain_resolution_debug
+build --define=PREFIX=${PREFIX}
+build --define=PROTOBUF_INCLUDE_PATH=${PREFIX}/include
+build --cpu=${TARGET_CPU}
+build --config=noaws
+build --local_cpu_resources=${CPU_COUNT}"
+EOF
 
 if [[ "${target_platform}" == "osx-arm64" ]]; then
-  BUILD_OPTS="${BUILD_OPTS} --config=macos_arm64"
+  echo "build --config=macos_arm64" >> .bazelrc
   export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 export TF_ENABLE_XLA=1
@@ -121,9 +128,6 @@ export TF_DOWNLOAD_CLANG=0
 export TF_SET_ANDROID_WORKSPACE=0
 export TF_CONFIGURE_IOS=0
 
-# Get rid of unwanted defaults
-sed -i -e "/PROTOBUF_INCLUDE_PATH/c\ " .bazelrc
-sed -i -e "/PREFIX/c\ " .bazelrc
 
 
 if [[ ${cuda_compiler_version} != "None" ]]; then
@@ -159,7 +163,7 @@ bazel shutdown
 ./configure
 
 # build using bazel
-bazel ${BAZEL_OPTS} build ${BUILD_OPTS} ${BUILD_TARGET}
+bazel ${BAZEL_OPTS} build ${BUILD_TARGET}
 
 # build a whl file
 mkdir -p $SRC_DIR/tensorflow_pkg
