@@ -8,6 +8,18 @@ jobs:
     vmImage: macOS-11
   strategy:
     matrix:
+      osx_64_abseil_cpp20211102.0python3.10.____cpython:
+        CONFIG: osx_64_abseil_cpp20211102.0python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_abseil_cpp20211102.0python3.7.____cpython:
+        CONFIG: osx_64_abseil_cpp20211102.0python3.7.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_abseil_cpp20211102.0python3.8.____cpython:
+        CONFIG: osx_64_abseil_cpp20211102.0python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_abseil_cpp20211102.0python3.9.____cpython:
+        CONFIG: osx_64_abseil_cpp20211102.0python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
       osx_64_abseil_cpp20220623.0python3.10.____cpython:
         CONFIG: osx_64_abseil_cpp20220623.0python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -19,6 +31,15 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       osx_64_abseil_cpp20220623.0python3.9.____cpython:
         CONFIG: osx_64_abseil_cpp20220623.0python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_abseil_cpp20211102.0python3.10.____cpython:
+        CONFIG: osx_arm64_abseil_cpp20211102.0python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_abseil_cpp20211102.0python3.8.____cpython:
+        CONFIG: osx_arm64_abseil_cpp20211102.0python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_abseil_cpp20211102.0python3.9.____cpython:
+        CONFIG: osx_arm64_abseil_cpp20211102.0python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
       osx_arm64_abseil_cpp20220623.0python3.10.____cpython:
         CONFIG: osx_arm64_abseil_cpp20220623.0python3.10.____cpython
