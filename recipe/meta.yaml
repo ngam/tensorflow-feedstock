@@ -11,7 +11,6 @@ source:
     patches:
       - patches/0001-loosen-requirements.patch
 
-
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ estimator_version.replace(".rc", "-rc") }}.tar.gz
     sha256: 795449159215969afd1c2325203bfba72d44d2baf2f28eda9cccc2ad2be29a32
     folder: tensorflow-estimator
@@ -20,8 +19,6 @@ build:
   number: 0
   skip: true  # [win]
   skip: true  # [python_impl == 'pypy']
-  # We specify a version of abseil_cpp that is compatible with C++17
-  skip: true  # [abseil_cpp != '20220623.0']
   skip: true  # [cuda_compiler_version == "10.2"]
   skip: true  # [cuda_compiler_version == "11.0"]
   skip: true  # [cuda_compiler_version == "11.1"]
@@ -46,7 +43,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
     - bazel >=5.2.0
-
+    - abseil-cpp
     - grpc-cpp
     - libprotobuf
     - nasm
@@ -150,6 +147,8 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
+        - abseil-cpp
+        - grpc-cpp
       host:
         # GPU reuqirements
         - cudnn                   # [cuda_compiler_version != "None"]
@@ -210,6 +209,7 @@ outputs:
         - opt_einsum >=2.3.2
         - protobuf >=3.9.2
         - python-flatbuffers >=2
+        - flatbuffers >=2
         - six >=1.12
         - termcolor >=1.1.0
         - typing_extensions >=3.6.6
@@ -275,13 +275,16 @@ outputs:
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
         - bazel >=5.2.0
-
+        - abseil-cpp
+        - grpc-cpp
       host:
         - python
         - pip
         - packaging
         - setuptools
         - wheel
+        - abseil-cpp
+        - grpc-cpp
         # This ensures that a consistent version of openssl is chosen between
         # all packages.
         # https://github.com/conda-forge/conda-forge.github.io/issues/1528
@@ -315,6 +318,8 @@ outputs:
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
       # host requirements to pick up run_exports
+        - abseil-cpp
+        - grpc-cpp
       host:
         - abseil-cpp
         - giflib
@@ -360,6 +365,8 @@ outputs:
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
       # host requirements to pick up run_exports
+        - abseil-cpp
+        - grpc-cpp
       host:
         - abseil-cpp
         - giflib
