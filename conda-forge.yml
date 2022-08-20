@@ -1,3 +1,8 @@
+channels:
+  # sources selects the channels to pull packages from, in order.
+  sources:
+    - ngam
+    - conda-forge
 build_platform:
   osx_arm64: osx_64
 conda_forge_output_validation: true
