@@ -22,6 +22,7 @@ build:
   skip: true  # [cuda_compiler_version == "10.2"]
   skip: true  # [cuda_compiler_version == "11.0"]
   skip: true  # [cuda_compiler_version == "11.1"]
+  skip: true  # [abseil_cpp == '20211102.0']
 
 requirements:
   build:
