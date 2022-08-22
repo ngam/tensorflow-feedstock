@@ -278,6 +278,7 @@ outputs:
         - bazel >=5.2.0
         - abseil-cpp
         - grpc-cpp
+        - openssl
         - {{ pin_subpackage('tensorflow-base', exact=True) }}
       host:
         - python
