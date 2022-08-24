@@ -1,4 +1,4 @@
-{% set version = "2.10.0.rc1" %}
+{% set version = "2.10.0.rc2" %}
 {% set estimator_version = "2.10.rc0" %}
 
 package:
