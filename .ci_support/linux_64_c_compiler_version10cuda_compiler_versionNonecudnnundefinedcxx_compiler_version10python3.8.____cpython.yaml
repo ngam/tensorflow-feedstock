@@ -1,11 +1,9 @@
-abseil_cpp:
-- '20220623.0'
 c_compiler:
 - gcc
 c_compiler_version:
 - '10'
 cdt_name:
-- cos7
+- cos6
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,15 +11,15 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- '11.2'
+- None
 cudnn:
-- '8'
+- undefined
 cxx_compiler:
 - gxx
 cxx_compiler_version:
 - '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-cuda:11.2
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 giflib:
 - '5.2'
 grpc_cpp:
@@ -30,6 +28,8 @@ icu:
 - '70'
 jpeg:
 - '9'
+libabseil:
+- '20220623.0'
 libcurl:
 - '7'
 libpng:
@@ -55,7 +55,7 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.8.* *_cpython
 python_impl:
 - cpython
 snappy:
@@ -65,8 +65,6 @@ sqlite:
 target_platform:
 - linux-64
 zip_keys:
-- - abseil_cpp
-  - grpc_cpp
 - - c_compiler_version
   - cxx_compiler_version
   - cudnn
