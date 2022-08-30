@@ -1,4 +1,4 @@
-{% set version = "2.10.0.rc2" %}
+{% set version = "2.10.0.rc3" %}
 {% set estimator_version = "2.10.rc0" %}
 
 package:
@@ -22,7 +22,7 @@ build:
   skip: true  # [cuda_compiler_version == "10.2"]
   skip: true  # [cuda_compiler_version == "11.0"]
   skip: true  # [cuda_compiler_version == "11.1"]
-  skip: true  # [abseil_cpp == '20211102.0']
+  skip: true  # [libabseil == '20211102.0']
 
 requirements:
   build:
@@ -44,7 +44,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
     - bazel >=5.2.0
-    - abseil-cpp
+    - libabseil
     - grpc-cpp
     - libprotobuf
     - nasm
@@ -78,7 +78,7 @@ requirements:
     # but so far there have been no problems with leaving these
     # unpinned; though some restrictions come in for packages
     # that are also listed as a requirement for the pip_package.
-    - abseil-cpp
+    - libabseil
     - astor
     - cython
     - dill
@@ -148,7 +148,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
-        - abseil-cpp
+        - libabseil
         - grpc-cpp
       host:
         # GPU reuqirements
@@ -160,7 +160,7 @@ outputs:
         - packaging
         - wheel
         # TF_SYSTEM_LIBS
-        - abseil-cpp
+        - libabseil
         - astor
         - cython
         - dill
@@ -276,7 +276,7 @@ outputs:
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
         - bazel >=5.2.0
-        - abseil-cpp
+        - libabseil
         - grpc-cpp
         - openssl
         - {{ pin_subpackage('tensorflow-base', exact=True) }}
@@ -286,7 +286,7 @@ outputs:
         - packaging
         - setuptools
         - wheel
-        - abseil-cpp
+        - libabseil
         - grpc-cpp
         # This ensures that a consistent version of openssl is chosen between
         # all packages.
@@ -321,10 +321,10 @@ outputs:
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
       # host requirements to pick up run_exports
-        - abseil-cpp
+        - libabseil
         - grpc-cpp
       host:
-        - abseil-cpp
+        - libabseil
         - giflib
         - grpc-cpp
         - icu
@@ -368,10 +368,10 @@ outputs:
         # https://github.com/conda-forge/tensorflow-feedstock/issues/162
         - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
       # host requirements to pick up run_exports
-        - abseil-cpp
+        - libabseil
         - grpc-cpp
       host:
-        - abseil-cpp
+        - libabseil
         - giflib
         - grpc-cpp
         - icu
