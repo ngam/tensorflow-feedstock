@@ -115,8 +115,8 @@ requirements:
     - typing_extensions >=3.6.6
     - wrapt >=1.11.0
     # TF-API needs to move in sync
-    - tensorboard >=2.9,<2.10
-    - keras >=2.9,<2.10
+    - tensorboard >=2.10,<2.11
+    - keras >=2.10,<2.11
 
 outputs:
   # 2021/12/29: hmaarrfk
@@ -194,8 +194,8 @@ outputs:
         - typing_extensions >=3.6.6
         - wrapt >=1.11.0
         # TF-API needs to move in sync
-        - tensorboard >=2.9,<2.10
-        - keras >=2.9,<2.10
+        - tensorboard >=2.10,<2.11
+        - keras >=2.10,<2.11
       run:
         - python
         - packaging
@@ -216,8 +216,8 @@ outputs:
         - typing_extensions >=3.6.6
         - wrapt >=1.11.0
         # TF-API needs to move in sync
-        - tensorboard >=2.9,<2.10
-        - keras >=2.9,<2.10
+        - tensorboard >=2.10,<2.11
+        - keras >=2.10,<2.11
         # avoid that people without GPUs needlessly download ~0.5-1GB
         - __cuda  # [cuda_compiler_version != "None"]
     # TODO: decide on the name of the package
