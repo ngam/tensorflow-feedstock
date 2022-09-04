@@ -279,6 +279,7 @@ outputs:
         - libabseil
         - grpc-cpp
         - openssl
+        - libprotobuf
         - {{ pin_subpackage('tensorflow-base', exact=True) }}
       host:
         - python
@@ -288,6 +289,7 @@ outputs:
         - wheel
         - libabseil
         - grpc-cpp
+        - libprotobuf
         # This ensures that a consistent version of openssl is chosen between
         # all packages.
         # https://github.com/conda-forge/conda-forge.github.io/issues/1528
