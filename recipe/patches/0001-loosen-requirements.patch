@@ -9,22 +9,22 @@ Subject: [PATCH] loosen requirements
 Co-authored-by: Mark Harfouche <mark.harfouche@gmail.com>
 Co-authored-by: ngam
 ---
- tensorflow/tools/pip_package/setup.py | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ tensorflow/tools/pip_package/setup.py | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/tensorflow/tools/pip_package/setup.py b/tensorflow/tools/pip_package/setup.py
-index cdcc355f4a6..b9cfdd6bb60 100644
+index c3f29b7c92728..4719e3ce63b98 100644
 --- a/tensorflow/tools/pip_package/setup.py
 +++ b/tensorflow/tools/pip_package/setup.py
-@@ -81,7 +81,6 @@ REQUIRED_PACKAGES = [
+@@ -88,7 +88,6 @@ def standard_or_nightly(standard, nightly):
+     'gast >= 0.2.1, <= 0.4.0',
      'google_pasta >= 0.1.1',
      'h5py >= 2.9.0',
-     'keras_preprocessing >= 1.1.1',  # 1.1.0 needs tensorflow==1.7
 -    'libclang >= 13.0.0',
      'numpy >= 1.20',
      'opt_einsum >= 2.3.2',
      'packaging',
-@@ -92,13 +91,12 @@ REQUIRED_PACKAGES = [
+@@ -99,14 +98,12 @@ def standard_or_nightly(standard, nightly):
      # See also: https://github.com/protocolbuffers/protobuf/issues/9954
      # See also: https://github.com/tensorflow/tensorflow/issues/56077
      # This is a temporary patch for now, to patch previous TF releases.
@@ -35,7 +35,8 @@ index cdcc355f4a6..b9cfdd6bb60 100644
      'termcolor >= 1.1.0',
      'typing_extensions >= 3.6.6',
      'wrapt >= 1.11.0',
--    'tensorflow-io-gcs-filesystem >= 0.23.1',
+-    'tensorflow-io-gcs-filesystem >= 0.23.1;platform_machine!="arm64" or ' +
+-    'platform_system!="Darwin"',
      # grpcio does not build correctly on big-endian machines due to lack of
      # BoringSSL support.
      # See https://github.com/tensorflow/tensorflow/issues/17882.
