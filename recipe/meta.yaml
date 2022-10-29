@@ -42,7 +42,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
     - bazel >=5.2.0
-    - grpc-cpp
+    - libgrpc
     - libprotobuf
     - nasm
     - sed
@@ -80,7 +80,7 @@ requirements:
     - cython
     - dill
     - giflib
-    - grpc-cpp
+    - libgrpc
     # 2022/04/25 hmaarrfk
     # the latest flatbuffers 2.0.6 seems to have removed a sybmol in a patch release...
     # https://github.com/Qengineering/TensorFlow_Lite_Pose_RPi_64-bits/issues/3#issuecomment-1034799822
@@ -159,7 +159,7 @@ outputs:
         - cython
         - dill
         - giflib
-        - grpc-cpp
+        - libgrpc
         - flatbuffers >=2
         - icu
         - jpeg
@@ -312,7 +312,7 @@ outputs:
       host:
         - libabseil
         - giflib
-        - grpc-cpp
+        - libgrpc
         - icu
         - jpeg
         - libcurl
@@ -357,7 +357,7 @@ outputs:
       host:
         - libabseil
         - giflib
-        - grpc-cpp
+        - libgrpc
         - icu
         - jpeg
         - libcurl
