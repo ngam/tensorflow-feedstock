@@ -32,6 +32,8 @@ libabseil:
 - '20220623.0'
 libcurl:
 - '7'
+libgrpc:
+- '1.49'
 libpng:
 - '1.6'
 libprotobuf:
