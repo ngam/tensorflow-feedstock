@@ -7,14 +7,14 @@ package:
 
 source:
   - url: https://github.com/tensorflow/tensorflow/archive/refs/tags/v{{ version.replace(".rc", "-rc") }}.tar.gz
-    sha256: b5a1bb04c84b6fe1538377e5a1f649bb5d5f0b2e3625a3c526ff3a8af88633e8
+    sha256: 230ed16992f77e4092bbd7c8dae0b71d7ef7129503bf26386d4b4a03e2665db9
     patches:
       - patches/0001-loosen-requirements.patch
       - patches/0002-cublas-fix-backport.patch
 
 
   - url: https://github.com/tensorflow/estimator/archive/refs/tags/v{{ estimator_version.replace(".rc", "-rc") }}.tar.gz
-    sha256: 60df309377cf4e584ca20198f9639beb685d50616395f50770fc0999092d6d85
+    sha256: de718f23f79487add3313e63751ef55f59258f6f75f1696572ce6198cd606a49
     folder: tensorflow-estimator
 
 build:
