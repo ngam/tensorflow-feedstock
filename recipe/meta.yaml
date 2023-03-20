@@ -41,7 +41,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}                 # [cuda_compiler_version != "None"]
     - bazel >=5.2.0,<6
-    - libgrpc
+    - libgrpc  {{ libgrpc }}
     - libprotobuf
     - nasm
     - sed
